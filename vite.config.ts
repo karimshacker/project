@@ -9,16 +9,13 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     emptyOutDir: true,
-    rollupOptions: {
-      output: {
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'assets/[name][extname]';
-          return 'assets/[name]-[hash][extname]';
-        },
-      },
-    },
   },
   css: {
-    devSourcemap: true,
+    postcss: {
+      plugins: [
+        require('tailwindcss'),
+        require('autoprefixer'),
+      ],
+    },
   },
 });
