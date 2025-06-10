@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/',
   build: {
+    target: 'es2020',
     outDir: 'dist',
     assetsDir: 'assets',
     emptyOutDir: true,

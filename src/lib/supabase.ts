@@ -1,3 +1,5 @@
+import { createClient } from '@supabase/supabase-js';
+
 // Supabase configuration with fallback for development
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -9,7 +11,6 @@ if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('Supabase environment variables are not configured. Some features may not work.');
 } else {
   try {
-    const { createClient } = await import('@supabase/supabase-js');
     supabase = createClient(supabaseUrl, supabaseAnonKey, {
       auth: {
         persistSession: false, // Disable session persistence to avoid lock issues
