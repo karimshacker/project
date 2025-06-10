@@ -10,7 +10,13 @@ if (!supabaseUrl || !supabaseAnonKey) {
 } else {
   try {
     const { createClient } = await import('@supabase/supabase-js');
-    supabase = createClient(supabaseUrl, supabaseAnonKey);
+    supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: false, // Disable session persistence to avoid lock issues
+        autoRefreshToken: false, // Disable auto refresh to avoid lock issues
+        detectSessionInUrl: false // Disable session detection in URL
+      }
+    });
     console.log('Supabase client initialized successfully');
   } catch (error) {
     console.error('Failed to initialize Supabase client:', error);
