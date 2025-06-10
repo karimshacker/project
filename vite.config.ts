@@ -10,12 +10,10 @@ export default defineConfig({
     assetsDir: 'assets',
     emptyOutDir: true,
   },
+  optimizeDeps: {
+    exclude: ['tailwindcss']
+  },
   css: {
-    postcss: {
-      plugins: [
-        require('tailwindcss'),
-        require('autoprefixer'),
-      ],
-    },
+    postcss: './postcss.config.js'
   },
 });
