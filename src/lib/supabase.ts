@@ -1,13 +1,20 @@
 // Supabase configuration with fallback for development
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Only initialize Supabase if environment variables are available
 let supabase: any = null;
 
-if (supabaseUrl && supabaseAnonKey) {
-  const { createClient } = await import('@supabase/supabase-js');
-  supabase = createClient(supabaseUrl, supabaseAnonKey);
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn('Supabase environment variables are not configured. Some features may not work.');
+} else {
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+    console.log('Supabase client initialized successfully');
+  } catch (error) {
+    console.error('Failed to initialize Supabase client:', error);
+  }
 }
 
 export { supabase };
