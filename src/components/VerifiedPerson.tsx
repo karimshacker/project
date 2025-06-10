@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CheckCircle, User, RotateCcw, LogIn, LogOut, Database } from 'lucide-react';
 import { Person } from '../types';
 import { useUserSessions } from '../hooks/useUserSessions';
