@@ -46,11 +46,13 @@ export const QRScanner: React.FC<QRScannerProps> = ({ onScan, isActive }) => {
         codeReader.current.decodeFromVideoDevice(
           selectedDeviceId,
           videoRef.current,
-          (result, error) => {
+          (result, err) => {
             if (result) {
               // Stop scanning after successful scan
               stopScanning();
               onScan(result.getText());
+            } else if (err) {
+              setError('Failed to decode QR code. Please try again.');
             }
           }
         );
