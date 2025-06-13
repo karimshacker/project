@@ -4,7 +4,7 @@ import { QRScanner } from './components/QRScanner';
 import { ScanButton } from './components/ScanButton';
 import { VerifiedPerson } from './components/VerifiedPerson';
 import { NotVerifiedPerson } from './components/NotVerifiedPerson';
-import { useCSVData } from './hooks/useCSVData';
+import { useDatabaseData } from './hooks/useDatabaseData';
 import { Person } from './types';
 
 type AppState = 'idle' | 'scanning' | 'verified' | 'not-verified';
@@ -13,7 +13,7 @@ function App() {
   const [state, setState] = useState<AppState>('idle');
   const [scannedPerson, setScannedPerson] = useState<Person | null>(null);
   const [scannedId, setScannedId] = useState<string>('');
-  const { findPersonByUniqueId, loading, error } = useCSVData();
+  const { findPersonByUniqueId, loading, error } = useDatabaseData();
 
   const handleStartScanning = () => {
     setState('scanning');
